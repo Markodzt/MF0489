@@ -24,7 +24,8 @@ En esta fase se realizaron tareas de reconocimiento activo y pasivo con el objet
 ```bash
 nmap -sC -sV -p- 10.10.116.128
 ```
-<img width="741" height="256" alt="image" src="https://github.com/user-attachments/assets/09740a12-ff55-4aaf-8ebe-4ba33684f9e4" />
+<img width="741" height="239" alt="image" src="https://github.com/user-attachments/assets/e7974ed5-d1d9-41c2-83c3-e4cf062feec7" />
+
 
 ### Resultado relevante:
 - **22/tcp**   → open|filtered (SSH)
