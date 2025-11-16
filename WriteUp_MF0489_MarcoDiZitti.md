@@ -173,10 +173,10 @@ Confirmado:
 ---
 
 # 4. Flags encontradas
-<img width="502" height="157" alt="Screenshot 2025-11-16 210033" src="https://github.com/user-attachments/assets/5babe215-1052-4be0-91c0-70550dea2876" />
-<img width="940" height="422" alt="image-1" src="https://github.com/user-attachments/assets/2188530d-e47d-4b82-96df-c678e575bd5e" />
-<img width="563" height="177" alt="image-2" src="https://github.com/user-attachments/assets/75f9109a-6380-4d14-b967-87b8c5d05966" />
-<img width="940" height="483" alt="image" src="https://github.com/user-attachments/assets/0d17ff27-0b1b-49e7-9834-3890fa77881c" />
+<img width="500" height="170" alt="Screenshot 2025-11-16 210033" src="https://github.com/user-attachments/assets/5babe215-1052-4be0-91c0-70550dea2876" />
+<img width="500" height="170" alt="image-1" src="https://github.com/user-attachments/assets/2188530d-e47d-4b82-96df-c678e575bd5e" />
+<img width="500" height="170" alt="image-2" src="https://github.com/user-attachments/assets/75f9109a-6380-4d14-b967-87b8c5d05966" />
+<img width="500" height="170" alt="image" src="https://github.com/user-attachments/assets/0d17ff27-0b1b-49e7-9834-3890fa77881c" />
 
 
 ---
